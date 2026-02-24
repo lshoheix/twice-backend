@@ -87,7 +87,7 @@ class KakaoAuthServiceImpl(KakaoAuthServiceInterface):
             "redirect_uri": self._redirect_uri,
             "code": code,
         }
-        with httpx.Client() as client:
+        with httpx.Client(timeout=15.0) as client:
             resp = client.post(
                 KAKAO_TOKEN_URL,
                 data=payload,
@@ -106,7 +106,7 @@ class KakaoAuthServiceImpl(KakaoAuthServiceInterface):
 
     def _fetch_user_info(self, access_token: str) -> Optional[KakaoUserInfo]:
         """PM-LSH-4: 액세스 토큰으로 Kakao 사용자 정보 조회."""
-        with httpx.Client() as client:
+        with httpx.Client(timeout=10.0) as client:
             resp = client.get(
                 KAKAO_USER_ME_URL,
                 headers={"Authorization": f"Bearer {access_token}"},
