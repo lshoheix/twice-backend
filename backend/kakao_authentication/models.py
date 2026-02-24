@@ -20,6 +20,7 @@ class TokenAndUserResponse(BaseModel):
     expires_in: Optional[int] = Field(None, description="액세스 토큰 만료 시간(초)")
     refresh_token_expires_in: Optional[int] = Field(None, description="리프레시 토큰 만료 시간(초)")
     user: Optional["KakaoUserInfo"] = Field(None, description="Kakao 사용자 정보")
+    account_id: Optional[str] = Field(None, description="앱 내 계정 ID (Kakao 로그인 시 생성/조회)")
 
 
 class KakaoUserInfo(BaseModel):
